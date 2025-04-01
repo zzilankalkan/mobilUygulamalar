@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 🔹 Arka Plan Görseli -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fb_arkaplan"
+        android:alpha="1.5" />
+
+    <!-- 🔹 Kayıt Formu -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/editTextRegisterUsername"
+                android:hint="Kullanıcı Adı"
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@android:drawable/ic_menu_edit"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background" />
+
+            <EditText
+                android:id="@+id/editTextRegisterEmail"
+                android:hint="E-Posta Adresi"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@android:drawable/ic_dialog_email"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background" />
+
+            <EditText
+                android:id="@+id/editTextRegisterBirthdate"
+                android:hint="Doğum Tarihi (gg.aa.yyyy)"
+                android:inputType="text"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@android:drawable/ic_menu_my_calendar"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background" />
+
+            <EditText
+                android:id="@+id/editTextRegisterPassword"
+                android:hint="Şifre"
+                android:inputType="textPassword"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background" />
+
+            <Button
+                android:id="@+id/buttonRegister"
+                android:text="Kayıt Ol"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_700"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

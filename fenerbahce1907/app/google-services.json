@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "584682796357",
+    "project_id": "fenerbahce1907-1e841",
+    "storage_bucket": "fenerbahce1907-1e841.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584682796357:android:532069ee08dcf74b50ba2c",
+        "android_client_info": {
+          "package_name": "com.example.fenerbahce1907"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClCfAzqkicPXTjoJRAwT366zgyT2jtyks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

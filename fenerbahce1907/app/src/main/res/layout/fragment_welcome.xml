@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Arka Plan Görseli -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fb_arkaplan"
+        android:alpha="0.3"/>
+
+    <!-- İçerik -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <!-- Mesaj -->
+        <TextView
+            android:text="💬 Bugün Fenerbahçe için harika bir gün!"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Hoş geldiniz mesajı -->
+        <TextView
+            android:id="@+id/welcomeText"
+            android:text="🎉 Hoş Geldin!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Ana Sayfaya Dön Butonu -->
+        <Button
+            android:id="@+id/buttonBackHome"
+            android:text="Ana Sayfaya Dön"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_700"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"/>
+
+        <!-- Çıkış Yap Butonu -->
+        <Button
+            android:id="@+id/buttonLogout"
+            android:text="Çıkış Yap"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</FrameLayout>
