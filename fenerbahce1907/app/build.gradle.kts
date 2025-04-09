@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services") // 🔹 Firebase servisi eklendi
     id("org.jetbrains.kotlin.kapt")
 
+    id("kotlin-kapt")
 }
 
 android {
@@ -61,6 +62,19 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
     kapt("com.github.bumptech.glide:compiler:4.15.1")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation ("org.jsoup:jsoup:1.15.4")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1") // Java kullanıyorsan bu da şart
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
