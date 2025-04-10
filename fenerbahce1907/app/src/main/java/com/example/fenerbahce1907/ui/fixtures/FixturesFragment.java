@@ -1,98 +1,110 @@
 package com.example.fenerbahce1907.ui.fixtures;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fenerbahce1907.R;
-import com.example.fenerbahce1907.model.Match;
-import com.example.fenerbahce1907.model.MatchResponse;
-import com.example.fenerbahce1907.network.FixtureApiService;
-import com.example.fenerbahce1907.network.RetrofitInstance;
+import com.example.fenerbahce1907.adapter.FixtureAdapter;
+import com.example.fenerbahce1907.model.Fixture;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FixturesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FixtureAdapter adapter;
+    private List<Fixture> fixtureList;
+    private FirebaseFirestore db;
 
-    @Nullable
+    private Button btnGecmis, btnGelecek;
+
+    public FixturesFragment() {}
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fixtures, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerFixtures);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        fetchFixturesFromApi();
+        fixtureList = new ArrayList<>();
+        adapter = new FixtureAdapter(fixtureList);
+        recyclerView.setAdapter(adapter);
+
+        btnGecmis = view.findViewById(R.id.btn_gecmis);
+        btnGelecek = view.findViewById(R.id.btn_gelecek);
+
+        db = FirebaseFirestore.getInstance();
+
+        // Varsayılan olarak tümünü göster
+        loadAllFixtures();
+
+        // GEÇMİŞ butonu
+        btnGecmis.setOnClickListener(v -> filterFixtures(true));
+
+        // GELECEK butonu
+        btnGelecek.setOnClickListener(v -> filterFixtures(false));
 
         return view;
     }
 
-    private void fetchFixturesFromApi() {
-        FixtureApiService apiService = RetrofitInstance
-                .getRetrofitInstance()
-                .create(FixtureApiService.class);
-
-        Call<MatchResponse> call = apiService.getSuperLigMatches(); // Süper Lig maçlarını al
-
-        call.enqueue(new Callback<MatchResponse>() {
-            @Override
-            public void onResponse(Call<MatchResponse> call, Response<MatchResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Match> matchList = response.body().getMatches();
-
-                    // 🔍 Sadece Fenerbahçe'nin oynadığı maçları filtrele
-                    // 🔍 Fenerbahçe'nin oynadığı maçları güçlü filtreyle al
-                    List<Match> filteredList = new ArrayList<>();
-                    // 🔍 Tüm maçlardaki takım isimlerini loglayalım
-                    for (Match match : matchList) {
-                        Log.d("Takımİsimleri", "🏠 " + match.getHomeTeam().name + " vs " + match.getAwayTeam().name);
+    private void loadAllFixtures() {
+        db.collection("fikstur")
+                .orderBy("hafta", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    fixtureList.clear();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        Fixture fixture = doc.toObject(Fixture.class);
+                        fixtureList.add(fixture);
                     }
-                    String[] keywords = {"fenerbahce", "fenerbahçe", "fenerbahce sk", "fenerbahçe a.ş"};
+                    adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Veri alınamadı: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
+    }
 
-                    for (Match match : matchList) {
-                        String home = match.getHomeTeam().name.toLowerCase();
-                        String away = match.getAwayTeam().name.toLowerCase();
+    private void filterFixtures(boolean isPast) {
+        db.collection("fikstur")
+                .orderBy("tarih", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    fixtureList.clear();
+                    Date now = new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-                        for (String key : keywords) {
-                            if (home.contains(key) || away.contains(key)) {
-                                filteredList.add(match);
-                                break;
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        Fixture fixture = doc.toObject(Fixture.class);
+                        try {
+                            Date matchDate = format.parse(fixture.getTarih());
+                            if ((isPast && matchDate.before(now)) || (!isPast && matchDate.after(now))) {
+                                fixtureList.add(fixture);
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
-
-
-                    // ♻️ Adapter'e filtrelenmiş listeyi ver
-                    adapter = new FixtureAdapter(getContext(), filteredList);
-                    recyclerView.setAdapter(adapter);
-
-                    Log.d("FixturesFragment", "Fenerbahçe maçları listelendi: " + filteredList.size());
-                } else {
-                    Log.e("FixturesFragment", "Veri alınamadı: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MatchResponse> call, Throwable t) {
-                Log.e("FixturesFragment", "API HATASI: " + t.getMessage());
-            }
-        });
+                    adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Filtreleme hatası: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 }

@@ -9,4 +9,8 @@
     <string name="logo_1907">1907 logosu</string>
     <string name="baslik_basarilar">BAŞARILAR</string>
     <string name="kupa">Kupa ikonu</string>
+
+    <string name="gecmis_button_text">Geçmiş</string>
+    <string name="gelecek_button_text">Gelecek</string>
+
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Buton aktif olduğunda sarı renk -->
+    <item android:state_pressed="true" android:color="@android:color/holo_orange_light"/>
+    <!-- Buton normalde mavi olacak -->
+    <item android:color="@android:color/holo_blue_light"/>
+</selector>

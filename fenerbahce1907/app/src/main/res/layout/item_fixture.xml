@@ -1,79 +1,51 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white"
-    android:padding="12dp"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp">
-
-    <!-- Tarih ve Lig -->
-    <TextView
-        android:id="@+id/textDateTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="02/04/2025 20:45"
-        android:textColor="#888"
-        android:textSize="13sp"/>
+    android:background="@drawable/bg_fixture_gradient"
+    android:padding="16dp"
+    android:layout_margin="10dp"
+    android:elevation="4dp">
 
     <TextView
-        android:id="@+id/textLeague"
+        android:id="@+id/txtHafta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ziraat Türkiye Kupası"
-        android:textStyle="italic"
-        android:textColor="#444"
+        android:text="Hafta 1"
+        android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:layout_marginBottom="6dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
 
-    <!-- Takımlar -->
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/txtTakimlar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:text="FENERBAHÇE vs GALATASARAY"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
-        <!-- Ev sahibi -->
-        <ImageView
-            android:id="@+id/imageHome"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/fener_logo" />
+    <TextView
+        android:id="@+id/txtSkor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 - 1"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:textColor="#FFFFFF" />
 
-        <TextView
-            android:id="@+id/textHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fenerbahçe"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginStart="6dp"/>
+    <TextView
+        android:id="@+id/txtTarih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2025-04-01"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:textColor="#DDDDDD" />
 
-        <!-- Skor -->
-        <TextView
-            android:id="@+id/textScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 - 2"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
 
-        <!-- Deplasman -->
-        <TextView
-            android:id="@+id/textAway"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Galatasaray"
-            android:textSize="16sp"/>
-
-        <ImageView
-            android:id="@+id/imageAway"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/gs_logo"
-            android:layout_marginStart="6dp"/>
-    </LinearLayout>
 </LinearLayout>

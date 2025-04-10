@@ -1,223 +1,170 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fener_white"
-    android:padding="20dp">
+    android:fillViewport="true">
 
     <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <!-- BAŞLIK -->
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:text="BAŞARILAR"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- KATEGORİ BUTONLARI -->
+        <!-- Tüm kategori butonları: Yana kaydırmalı -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:scrollbars="none">
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/btnFutbol"
+                    android:text="Futbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FUTBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
                 <Button
                     android:id="@+id/btnBasketbol"
+                    android:text="Basketbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BASKETBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
                 <Button
                     android:id="@+id/btnVoleybol"
+                    android:text="Voleybol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VOLEYBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
                 <Button
                     android:id="@+id/btnKadinFutbol"
+                    android:text="Kadın Futbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="KADIN FUTBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
                 <Button
                     android:id="@+id/btnKadinBasketbol"
+                    android:text="Kadın Basketbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="KADIN BASKETBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
                 <Button
                     android:id="@+id/btnKadinVoleybol"
+                    android:text="Kadın Voleybol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="KADIN VOLEYBOL" />
+                    android:background="@drawable/button_selector"
+                    android:textColor="@color/edittext_background_color"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="120dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- FUTBOL BAŞARILARI -->
-        <LinearLayout
-            android:id="@+id/layoutFutbol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:text="FUTBOL BAŞARILARI"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
+        <!-- Her kategori için ayrı görünüm -->
+        <LinearLayout android:id="@+id/layoutFutbol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="visible">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerFutbolKupalar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_futbol" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="28"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Süper Lig\nŞampiyonluğu"
-                        android:textAlignment="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_futbol" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="08"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Başbakanlık\nKupası"
-                        android:textAlignment="center" />
-                </LinearLayout>
-            </LinearLayout>
+                android:padding="8dp"/>
         </LinearLayout>
 
-        <!-- Diğer kategoriler -->
-        <LinearLayout
-            android:id="@+id/layoutBasketbol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layoutBasketbol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="gone">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBasketbolKupalar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Basketbol başarıları burada listelenecek." />
+                android:padding="8dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutVoleybol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layoutVoleybol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="gone">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerVoleybolKupalar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Voleybol başarıları burada listelenecek." />
+                android:padding="8dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutKadinFutbol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layoutKadinFutbol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="gone">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerKadinFutbolKupalar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Kadın futbol başarıları burada listelenecek." />
+                android:padding="8dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutKadinBasketbol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layoutKadinBasketbol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="gone">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerKadinBasketbolKupalar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Kadın basketbol başarıları burada listelenecek." />
+                android:padding="8dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutKadinVoleybol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layoutKadinVoleybol"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:visibility="gone">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerKadinVoleybolKupalar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Kadın voleybol başarıları burada listelenecek." />
+                android:padding="8dp"/>
         </LinearLayout>
+
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
