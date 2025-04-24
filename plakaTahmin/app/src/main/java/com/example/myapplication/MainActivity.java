@@ -1,132 +1,114 @@
 package com.example.myapplication;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> stringList = new ArrayList<>();
-    private String[] turkiyeSehirleri = {
-            "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
-            "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli",
-            "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari",
-            "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir",
-            "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir",
-            "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat",
-            "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman",
-            "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye",
-            "Düzce"
-    };
-    private long startTime = 0;
-    private int plaka = 0;
-    private long elapsedTime = 0;
+
+    TextView textViewInput;
+    String input = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
 
-        setContentView(R.layout.start_layout);
+        textViewInput = findViewById(R.id.textViewInput);
+        ViewGroup gridLayout = findViewById(R.id.gridLayout);
 
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startTime = System.currentTimeMillis();
-                setContentView(R.layout.activity_main);
-
-                SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
-                sb.setMin(1);
-                sb.setMax(81);
-                TextView tx1 = (TextView) findViewById(R.id.textView);
-                Button onayla = (Button) findViewById(R.id.button2);
-                EditText txt = (EditText) findViewById(R.id.editTextText);
-
-                sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        plaka = progress;
-                        tx1.setText(String.valueOf(progress));
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-
-                onayla.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        long endTime = System.currentTimeMillis();
-                        elapsedTime = endTime - startTime;
-                        if (turkiyeSehirleri[plaka - 1].contains(txt.getText().toString())) {
-                            String liste = txt.getText().toString() + " - " + elapsedTime + "ms";
-                            startTime = 0;
-
-                            stringList.add(liste);
-                            setContentView(R.layout.layout);
-
-                            Button backButton = (Button) findViewById(R.id.button3);
-
-                            backButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    recreate();
-                                }
-                            });
-
-                            RecyclerView recyclerView = findViewById(R.id.deneme);
-                            recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(MainActivity.this));
-                            recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-                                @Override
-                                public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                                    TextView textView = new TextView(parent.getContext());
-                                    textView.setPadding(20, 20, 20, 20);
-                                    textView.setTextSize(18);
-                                    return new RecyclerView.ViewHolder(textView) {
-                                    };
-                                }
-
-                                @Override
-                                public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-                                    ((TextView) holder.itemView).setText(stringList.get(position));
-                                }
-
-                                @Override
-                                public int getItemCount() {
-                                    return stringList.size();
-                                }
-                            });
-                        } else {
-                            Toast.makeText(MainActivity.this, "Yanlış şehir girdiniz.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+        // Tüm butonlara tıklama olayı bağlanıyor
+        for (int i = 0; i < gridLayout.getChildCount(); i++) {
+            View view = gridLayout.getChildAt(i);
+            if (view instanceof Button) {
+                Button button = (Button) view;
+                button.setOnClickListener(v -> onButtonClick(button.getText().toString()));
             }
-        });
+        }
+    }
+
+    private void onButtonClick(String value) {
+        switch (value) {
+            case "=":
+                try {
+                    input = String.valueOf(eval(input));
+                } catch (Exception e) {
+                    input = "Hata";
+                }
+                break;
+            case "C":
+                input = "";
+                break;
+            default:
+                input += value;
+                break;
+        }
+
+        textViewInput.setText(input.isEmpty() ? "0" : input);
+    }
+
+    // Basit işlem çözümleyici
+    public double eval(final String str) {
+        return new Object() {
+            int pos = -1, ch;
+
+            void nextChar() { ch = (++pos < str.length()) ? str.charAt(pos) : -1; }
+
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char) ch);
+                return x;
+            }
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if      (eat('+')) x += parseTerm(); // toplama
+                    else if (eat('-')) x -= parseTerm(); // çıkarma
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if      (eat('*')) x *= parseFactor(); // çarpma
+                    else if (eat('/')) x /= parseFactor(); // bölme
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return parseFactor(); // + işareti
+                if (eat('-')) return -parseFactor(); // - işareti
+
+                double x;
+                int startPos = this.pos;
+                if (eat('(')) {
+                    x = parseExpression();
+                    eat(')');
+                } else if ((ch >= '0' && ch <= '9') || ch == '.') {
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else {
+                    throw new RuntimeException("Unexpected: " + (char) ch);
+                }
+
+                return x;
+            }
+        }.parse();
     }
 }

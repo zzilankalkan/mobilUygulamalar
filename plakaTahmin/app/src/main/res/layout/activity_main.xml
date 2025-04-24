@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- Sonuç ekranı -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plaka"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        android:id="@+id/textViewInput"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ECECEC"
+        android:gravity="end|center_vertical"
+        android:padding="16dp"
+        android:text="0"
+        android:textSize="28sp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+    <!-- Butonlar GridLayout ile -->
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        android:columnCount="4"
+        android:rowCount="5"
+        android:layout_marginTop="24dp">
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits=" abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ"
-        android:ems="10"
-        android:hint="Şehir"
-        android:inputType="textCapSentences|textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Satır 1 -->
+        <Button android:text="7" style="@style/CalcButton"/>
+        <Button android:text="8" style="@style/CalcButton"/>
+        <Button android:text="9" style="@style/CalcButton"/>
+        <Button android:text="+" style="@style/CalcButton"/>
+
+        <!-- Satır 2 -->
+        <Button android:text="4" style="@style/CalcButton"/>
+        <Button android:text="5" style="@style/CalcButton"/>
+        <Button android:text="6" style="@style/CalcButton"/>
+        <Button android:text="-" style="@style/CalcButton"/>
+
+        <!-- Satır 3 -->
+        <Button android:text="1" style="@style/CalcButton"/>
+        <Button android:text="2" style="@style/CalcButton"/>
+        <Button android:text="3" style="@style/CalcButton"/>
+        <Button android:text="*" style="@style/CalcButton"/>
+
+        <!-- Satır 4 -->
+        <Button android:text="0" style="@style/CalcButton"/>
+        <Button android:text="." style="@style/CalcButton"/>
+        <Button android:text="=" style="@style/CalcButton"/>
+        <Button android:text="/" style="@style/CalcButton"/>
+
+        <!-- Satır 5: Temizle Butonu -->
+        <Button
+            android:text="C"
+            style="@style/CalcButton"
+            android:layout_columnSpan="4"
+            android:background="#FFCDD2"/>
+    </GridLayout>
+</LinearLayout>
