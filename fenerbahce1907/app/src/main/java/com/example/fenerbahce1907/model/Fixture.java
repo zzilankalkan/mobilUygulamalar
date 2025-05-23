@@ -7,7 +7,7 @@ public class Fixture {
     private String deplasman;
     private String skor;
 
-    public Fixture() {} // Firestore için boş constructor
+    public Fixture() {}
 
     public Fixture(int hafta, String tarih, String saat, String ev, String deplasman, String skor) {
         this.hafta = hafta;

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fenerbahce1907.ui.home.HomeFragment;
 import com.example.fenerbahce1907.ui.login.LoginFragment;
 import com.example.fenerbahce1907.ui.profile.ProfileFragment;
-import com.example.fenerbahce1907.ui.media.MediaFragment; // 🔹 MEDYA EKLENDİ
+import com.example.fenerbahce1907.ui.media.MediaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.example.fenerbahce1907.ui.fixtures.FixturesFragment;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new HomeFragment();
             } else if (item.getItemId() == R.id.nav_fixtures) {
                 selectedFragment = new FixturesFragment();
-            } else if (item.getItemId() == R.id.nav_media) { // 🔹 MEDYA BUTONU EKLENDİ
+            } else if (item.getItemId() == R.id.nav_media) {
                 selectedFragment = new MediaFragment();
             } else if (item.getItemId() == R.id.nav_fb) {
                 if (mAuth.getCurrentUser() != null) {

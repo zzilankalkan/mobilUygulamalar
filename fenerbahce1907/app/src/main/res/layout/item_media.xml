@@ -6,9 +6,25 @@
     android:layout_marginHorizontal="8dp"
     android:elevation="4dp">
 
-    <ImageView
-        android:id="@+id/imageMedia"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageMedia"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+
+        <ImageButton
+            android:id="@+id/buttonSetLockScreen"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_lock_idle_lock"
+            android:contentDescription="Kilit ekranı yap"
+            android:tint="@android:color/white" />
+    </FrameLayout>
 </androidx.cardview.widget.CardView>
